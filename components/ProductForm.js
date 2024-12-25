@@ -6,17 +6,19 @@ import {ReactSortable} from "react-sortablejs";
 
 export default function ProductForm({
   _id,
-  title:existingTitle,
-  description:existingDescription,
+  productName:existingProductName,
   price:existingPrice,
+  description:existingDescription,
+  stock:existingStock,
   images:existingImages,
   category:assignedCategory,
   properties:assignedProperties,
 }) {
-  const [title,setTitle] = useState(existingTitle || '');
+  const [productName,setProductName] = useState(existingProductName || '');
   const [description,setDescription] = useState(existingDescription || '');
   const [category,setCategory] = useState(assignedCategory || '');
   const [productProperties,setProductProperties] = useState(assignedProperties || {});
+  const [stock,setStock] = useState(existingStock || '');
   const [price,setPrice] = useState(existingPrice || '');
   const [images,setImages] = useState(existingImages || []);
   const [goToProducts,setGoToProducts] = useState(false);
@@ -24,14 +26,14 @@ export default function ProductForm({
   const [categories,setCategories] = useState([]);
   const router = useRouter();
   useEffect(() => {
-    axios.get('/api/categories').then(result => {
+    axios.get('http://localhost/80/api/categories').then(result => {
       setCategories(result.data);
     })
   }, []);
   async function saveProduct(ev) {
     ev.preventDefault();
     const data = {
-      title,description,price,images,category,
+      productName,description,stock,price,images,category,
       properties:productProperties
     };
     if (_id) {
@@ -89,8 +91,8 @@ export default function ProductForm({
         <input
           type="text"
           placeholder="product name"
-          value={title}
-          onChange={ev => setTitle(ev.target.value)}/>
+          value={productName}
+          onChange={ev => setProductName(ev.target.value)}/>
         <label>Category</label>
         <select value={category}
                 onChange={ev => setCategory(ev.target.value)}>
@@ -149,6 +151,12 @@ export default function ProductForm({
           placeholder="description"
           value={description}
           onChange={ev => setDescription(ev.target.value)}
+        />
+        <label>Stock</label>
+        <input
+          type="number" placeholder="stock"
+          value={stock}
+          onChange={ev => setStock(ev.target.value)}
         />
         <label>Price (in USD)</label>
         <input
