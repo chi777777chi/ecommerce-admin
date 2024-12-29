@@ -19,6 +19,5 @@ export default function ProductPage({ params }) {
             {/* Add the Comments & Ratings Section */}
             <Comments productId={id} />
         </div>
-
     );
 }
