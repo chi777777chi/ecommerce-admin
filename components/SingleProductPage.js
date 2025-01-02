@@ -1,5 +1,5 @@
 'use client';
-
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import AddToCart from '@/components/AddToCart';
 export default function SingleProductPage({ params: paramsPromise }) {
@@ -43,13 +43,14 @@ export default function SingleProductPage({ params: paramsPromise }) {
         setQuantity((prev) => Math.max(1, prev + value)); // Ensure quantity is at least 1
     };
 
-    const handleAddToCart = () => {
-        alert(`已將 ${quantity} 件 ${product.productName} 加入購物車`);
-        // Add functionality to save to cart
-    };
-
+    // const handleAddToCart = () => {
+    //     alert(`已將 ${quantity} 件 ${product.productName} 加入購物車`);
+    //     // Add functionality to save to cart
+    // };
+    const router = useRouter();
     const handleCheckout = () => {
         alert(`正在結帳 ${quantity} 件 ${product.productName}`);
+        router.push('/checkout');
         // Add functionality for checkout
     };
 
@@ -113,19 +114,6 @@ export default function SingleProductPage({ params: paramsPromise }) {
                     </div>
                 </div>
                 <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-                    {/* <button
-                        onClick={handleAddToCart}
-                        style={{
-                            padding: '10px 20px',
-                            background: '#e4584f',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                        }}
-                    >
-                        加入購物車
-                    </button> */}
                     <AddToCart product={product} />
                     <button
                         onClick={handleCheckout}
