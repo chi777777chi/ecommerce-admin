@@ -117,6 +117,7 @@ export default function PartialProductPage({ slug }) {
           throw new Error(`Error: ${response.statusText}`);
         }
         const data = await response.json();
+        console.log(data);
         setProducts(data.products || []);
       } catch (err) {
         setError(err.message);

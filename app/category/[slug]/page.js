@@ -1,6 +1,6 @@
 import PartialProductPage from '@/components/PartialProductPage';
-export default function CategoryPage({ params }) {
-  const { slug } = params;
+export default async function CategoryPage({ params }) {
+  const { slug } = await params;
 
   return (
     <div className="container mx-auto px-4 py-8">

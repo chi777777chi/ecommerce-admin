@@ -43,10 +43,6 @@ export default function SingleProductPage({ params: paramsPromise }) {
         setQuantity((prev) => Math.max(1, prev + value)); // Ensure quantity is at least 1
     };
 
-    // const handleAddToCart = () => {
-    //     alert(`已將 ${quantity} 件 ${product.productName} 加入購物車`);
-    //     // Add functionality to save to cart
-    // };
     const router = useRouter();
     const handleCheckout = () => {
         alert(`正在結帳 ${quantity} 件 ${product.productName}`);
